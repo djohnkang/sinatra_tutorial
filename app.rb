@@ -24,7 +24,14 @@ get '/' do
 end
 
 get '/create_post' do
+    # 1. params로 날라온 데이터를 각각에 저장해주고,
   @title = params[:title]
-  @content = params[:content]
+  @body = params[:body]
+  
+  # 2. 각각의 내용을 해당하는 데이터베이스 column에 맞게 저장해주면 됩니다.
+  Post.create(
+    title: @title,
+    body: @body
+  )
   erb :create_post
 end
