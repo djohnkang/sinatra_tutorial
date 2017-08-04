@@ -20,11 +20,13 @@ DataMapper.finalize
 Post.auto_upgrade!
 
 get '/' do
+  @posts = Post.all(:order => [ :id.desc ], :limit => 20)
+
   erb :index
 end
 
 get '/create_post' do
-    # 1. params로 날라온 데이터를 각각에 저장해주고,
+  # 1. params로 날라온 데이터를 각각에 저장해주고,
   @title = params[:title]
   @body = params[:body]
   
@@ -34,4 +36,8 @@ get '/create_post' do
     body: @body
   )
   erb :create_post
+end
+
+get '/login' do
+  erb :login
 end
